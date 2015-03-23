@@ -1,0 +1,33 @@
+%Función:
+function sortedArray = quicksort(array)
+ 
+    %numel = numero de elementos del arreglo
+    if numel(array) <= 1 %Si el arreglo tiene un elemnto, entonces no puede ser ordenado      
+        sortedArray = array;
+        return
+    end
+ 
+    %seleccionamos el ultimo elemento como "end" y lo ponemos como pivote
+    pivot = array(end);
+    %quitamos el ultimo elemento del array
+    array(end) = [];
+ 
+    %creamos dos nuevos arreglos los cuales contienen los elementos que
+    %son mas chicos o iguales que el pivote "less" al mas chico y "great"
+    %al mas grande
+    less = array( array >= pivot );
+    greater = array( array < pivot );
+ 
+    %El array es la concatenacion de "less" ordenado, el pivote y "greater"
+    %ordenado
+    sortedArray = [quicksort(less) pivot quicksort(greater)];
+ 
+end
+ 
+%Este es el script:
+disp('Vector generado:');
+array = randi([-10000 10000], 1, 5);
+array
+disp('Arreglo ordenado:')
+array = quicksort(array);
+array
